@@ -12,8 +12,9 @@ Recommended:
  QuickNode
  Self-hosted full or archive node
  Update your .env:
+ ```env
  RPC=https://your-private-rpc
-
+```
 ✅ 2. Flashbots Protect (Mandatory)
 Never send profitable transactions to the public mempool.
 Use Flashbots Protect or another private relay.
@@ -44,13 +45,15 @@ Docker:
   Included docker-compose.override.yml handles log rotation.
 PM2:
   Use PM2's built-in log rotation:
+```bash
    pm2 install pm2-logrotate
-
+```
 
 ✅ 7. PM2 Cluster Mode (Optional for Non-Docker)
 For bots like cross-chain scanners or alert daemons:
+  ```bash
    pm2 start ecosystem.config.js -i max
-
+```
 This will utilize all available CPU cores for auxiliary bots.
 
 ✅ 8. Grafana + Prometheus Monitoring
@@ -70,8 +73,9 @@ Set custom Grafana alerts for:
 
 ✅ 9. Fork Testing (Mandatory)
 Before deployment:
+  ```bash
    npx hardhat test
-   
+ ```  
 Test for:
  Flashloan routing correctness
  Slippage impact
@@ -179,55 +183,47 @@ If you don’t have yarn:
 ```bash
 npm install -g yarn
 yarn install
+```
 Then rebuild:
 
-bash
-Copy
-Edit
+```bash
 docker-compose build
+```
 ✅ Step 5 — Start the Stack
-bash
-Copy
-Edit
+```bash
 docker-compose up -d
+```
 ✅ Step 6 — Confirm Everything is Running
-bash
-Copy
-Edit
+```bash
 docker-compose ps
+```
 You should see:
 
-mathematica
-Copy
-Edit
+```mathematica
 searcher     Up
 prometheus   Up
 grafana      Up
+```
 ✅ Step 7 — Access Monitoring Dashboard
 Service	URL
-Grafana	http://localhost:3000 (default login: admin / admin)
-Prometheus	http://localhost:9090
+ Grafana	http://localhost:3000 (default login: admin / admin)
+ Prometheus	http://localhost:9090
 ✅ Step 8 — Logs (Optional)
-bash
-Copy
-Edit
+```bash
 docker-compose logs -f searcher
+```
 ✅ Step 9 — Stopping the Bot
-bash
-Copy
-Edit
+```bash
 docker-compose down
+```
 ✅ Notes
 Profitable arbitrage will trigger Slack/Discord alerts if webhook configured.
-
 Monitoring stack (Grafana + Prometheus) is included.
-
 Docker Compose will relaunch the stack after a system reboot if you enable:
 
-yaml
-Copy
-Edit
+```yaml
 restart: always
+```
 in your docker-compose.yml.
 
 
