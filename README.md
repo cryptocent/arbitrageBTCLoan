@@ -115,3 +115,119 @@ Before production:
 Operator Advice:
 If you aren't sure about a deployment — assume it's not ready.
 Losses happen mostly due to poor pre-flight checks, not bad arbitrage logic.
+
+
+
+DOCKER INSTALL
+
+Prerequisites:
+ Installed Docker
+ Installed Docker Compose
+ Git Installed
+
+✅ Step 1 — Clone the Repository
+```bash
+git clone https://github.com/cryptocent/arbitrageBTCLoan.git
+cd arbitrageBTCLoan
+```
+✅ Step 2 — Create Environment File
+Copy the example:
+
+```bash
+cp .env.example .env
+```
+Then open .env in a text editor and configure:
+Your Private Key
+RPC endpoints
+Engine address
+Token addresses
+Adapter addresses
+Webhook URL (optional)
+
+Example:
+
+```ini
+PRIVATE_KEY=your_wallet_private_key
+RPC=https://your-mainnet-rpc
+ENGINE_ADDRESS=0xYourArbitrageEngine
+UNISWAP_ADAPTER=0xYourUniswapAdapter
+BALANCER_ADAPTER=0xYourBalancerAdapter
+CURVE_ADAPTER=0xYourCurveAdapter
+UNISWAP_QUOTER=0xYourUniswapQuoter
+CURVE_POOL=0xYourCurvePool
+WEBHOOK_URL=https://your-discord-or-slack-webhook
+FLASHLOAN_AMOUNT=1000
+SLIPPAGE_BPS=50
+```
+
+
+✅ Step 3 — Verify Docker is Working
+```bash
+docker --version
+docker-compose --version
+```
+✅ Step 4 — Build Docker Image
+
+docker-compose build
+If you get a yarn.lock error:
+
+```bash
+yarn install
+```
+If you don’t have yarn:
+
+```bash
+npm install -g yarn
+yarn install
+Then rebuild:
+
+bash
+Copy
+Edit
+docker-compose build
+✅ Step 5 — Start the Stack
+bash
+Copy
+Edit
+docker-compose up -d
+✅ Step 6 — Confirm Everything is Running
+bash
+Copy
+Edit
+docker-compose ps
+You should see:
+
+mathematica
+Copy
+Edit
+searcher     Up
+prometheus   Up
+grafana      Up
+✅ Step 7 — Access Monitoring Dashboard
+Service	URL
+Grafana	http://localhost:3000 (default login: admin / admin)
+Prometheus	http://localhost:9090
+✅ Step 8 — Logs (Optional)
+bash
+Copy
+Edit
+docker-compose logs -f searcher
+✅ Step 9 — Stopping the Bot
+bash
+Copy
+Edit
+docker-compose down
+✅ Notes
+Profitable arbitrage will trigger Slack/Discord alerts if webhook configured.
+
+Monitoring stack (Grafana + Prometheus) is included.
+
+Docker Compose will relaunch the stack after a system reboot if you enable:
+
+yaml
+Copy
+Edit
+restart: always
+in your docker-compose.yml.
+
+
