@@ -1,0 +1,20 @@
+# Node Modules
+node_modules/
+
+# Environment
+.env
+.env.*
+
+# Build Artifacts
+artifacts/
+cache/
+typechain/
+coverage/
+test-results/
+
+# OS
+.DS_Store
+
+# PM2
+pids/
+logs/

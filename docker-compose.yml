@@ -1,0 +1,42 @@
+version: "3.8"
+
+services:
+  searcher:
+    build: .
+    container_name: searcher-bot
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      - prometheus
+    networks:
+      - arbitrage-net
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - arbitrage-net
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    networks:
+      - arbitrage-net
+    volumes:
+      - ./monitoring:/etc/grafana/provisioning
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+
+networks:
+  arbitrage-net:
+    driver: bridge

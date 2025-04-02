@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  searcher:
+    environment:
+      - NODE_ENV=production
+      - EXTRA_LOGGING=true
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"

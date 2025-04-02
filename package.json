@@ -1,0 +1,24 @@
+// Real content to be inserted here
+{
+  "name": "arbitrage-operator-pack",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node scripts/searcherBot.js",
+    "optimizer": "node scripts/optimizer.js",
+    "test": "npx hardhat test",
+    "healthcheck": "node scripts/healthcheck.js"
+  },
+  "dependencies": {
+    "@aave/core-v3": "^1.17.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@openzeppelin/contracts": "^4.9.0",
+    "@flashbots/ethers-provider-bundle": "^0.4.1",
+    "axios": "^1.3.5",
+    "dotenv": "^16.0.3",
+    "ethers": "^5.7.2",
+    "pm2": "^5.2.2"
+  },
+  "devDependencies": {
+    "hardhat": "^2.15.0"
+  }
+}
