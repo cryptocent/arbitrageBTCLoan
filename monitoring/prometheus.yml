@@ -1,0 +1,12 @@
+# monitoring/prometheus.yml
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: 'searcher-bot'
+    static_configs:
+      - targets: ['searcher:9100'] # Customize based on your searcher metrics exporter port
+
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
